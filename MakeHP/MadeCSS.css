@@ -1,0 +1,35 @@
+body {
+	line-height: 1.5;
+	font-family: "Arial", "ü‡ÉSÉVÉbÉN", YuGothic, "ÉqÉâÉMÉmäpÉS ProN W3", "Hiragino Kaku Gothic ProN", "ÉÅÉCÉäÉI", Meiryo, sans-serif;
+}
+
+.panel{
+	width: 40em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left : auto ; margin-right : auto;
+	padding: 1em;
+	}
+
+#title{
+	width:40em;
+	padding-top: 1em;
+	margin-left : auto ; margin-right : auto;
+	}
+
+@media screen and (max-width: 44em) {
+	.panel{
+		width: 90%;
+		padding: 5%;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+		margin-left : auto; margin-right: auto;
+	}
+
+	#title{
+		width:90%;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+		margin-left : auto ; margin-right : auto;
+	}
+}

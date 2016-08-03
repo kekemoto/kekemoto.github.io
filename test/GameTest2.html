@@ -1,0 +1,41 @@
+<html>
+
+<head>
+	<mate charset="utf8">
+	<script>
+		window.addEventListener("load", function(){
+			//canvasの取得、設定test
+			var myCanvas = document.getElementsByTagName("canvas")[0];
+			var context = myCanvas.getContext("2d");
+			if(!context){return;}
+			
+            var x=y=0;
+            var size=100;
+            var speedX=speedY=10;
+            var image = new Image();
+            image.src = "../img/up.png";
+            
+            //loop
+            var timerID = setTimeout(function(){
+                context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+                
+                if(x<0 || 800-size<x){speedX=-1*speedX;}
+                if(y<0 || 600-size<y){speedY=-1*speedY;}
+                x+=speedX;
+                y+=speedY;
+                for(var i=0; i<100; i++){
+                    context.drawImage(image, x-i, y-i, size, size);
+                }
+                
+                setTimeout(arguments.callee, 16);
+            }, 16);
+		}, false);
+	</script>
+</head>
+
+<body>
+    <h1>負荷テスト</h1>
+	<canvas width="800" height="600">Canvas対応ブラウザを使用してください</canvas>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+body {
+	line-height: 1.5;
+	font-family: "Arial", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+
+article, footer{
+	width: 40em;
+	margin: 3em auto;
+}
+
+footer{
+	background-color: #EEEEEE;
+	padding: 1em;
+}
+
+@media screen and (max-width : 42em){
+	article, footer{
+		width: 90%;
+		margin: 0 auto;
+	}
+}

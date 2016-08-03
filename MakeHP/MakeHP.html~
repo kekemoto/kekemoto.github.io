@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+		<![endif]-->
+
+		<title>MakeHP</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<meta name="keywords" content="HP,簡単,作る">
+		<meta name="author" content="kekemoto">
+			<!-- twitter card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@nero1166" />
+		<meta property="og:title" content="MakeHP" />
+		<meta property="og:description" content="Let's easy to create a website for free. ホームページは文章打ち込むだけで" />
+		<meta property="og:url" content="http://www.asahi-net.or.jp/~yb7m-tkmt/index.html" />
+		<meta property="og:image" content="http://www.asahi-net.or.jp/~yb7m-tkmt/img/twitter.png" />
+		
+			<!-- CSS -->
+		<style type="text/css">
+			body {
+				line-height: 1.5;
+				font-family: "Segoe UI Light", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "AR ADGothicJP Medium", "メイリオ", Meiryo, sans-serif;
+			}
+
+			input, textarea, pre{
+				font-family: "Segoe UI Light", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "AR ADGothicJP Medium", "メイリオ", Meiryo, sans-serif;
+			}
+
+			input{
+				cursor: pointer;
+			}
+
+			textarea{
+				line-height: 1.5;
+			}
+
+			footer{
+				background-color: #EEEEEE;
+				margin-top: 2em;
+				padding: 1em;
+				display:-moz-box;
+				display:-webkit-box;
+				display:-o-box;
+				display:-ms-box;
+			}
+
+			.board{
+				width: 40em;
+				margin-top:1.5em;
+				margin-bottom:1.5em;
+				padding: 1em;
+				margin-left : auto ; margin-right : auto ;
+			}
+
+			.panel{
+				width: 100%;
+				margin-top: 2.5em;
+				margin-bottom: 2.5em;
+			}
+
+			.panel input[type="text"],textarea{
+				width: 100%;
+			}
+
+			.right{
+				float: right;
+			}
+
+			.center{
+				text-align: center;
+			}
+
+			.img{
+				width: 8%;
+				cursor: pointer;
+			}
+
+			.box{
+				width: 50%;
+			}
+
+			#setting{
+				display: none;
+			}
+
+			#preview{
+				display: none;
+			}
+
+			@media screen and (max-width: 44em) {
+				.board{
+					width: 90%;
+					margin-top:1.5em;
+					margin-bottom:1.5em;
+					padding: 1em;
+					margin-left : auto; margin-right: auto;
+				}
+
+				footer{
+					-moz-box-orient:vertical;
+					-webkit-box-orient:vertical;
+					-o-box-orient:vertical;
+					-ms-box-orient:vertical;
+				}
+
+				.box{
+					width: 100%;
+				}
+			}
+		</style>
+
+		<script type="text/javascript">
+			var number = 0;	//フォームの数。
+
+			window.onload = function() {
+				//イベントの追加
+				document.getElementById("make").addEventListener("click", make, false);
+				document.getElementById("back").addEventListener("click", back, false);
+				document.getElementById("plus").addEventListener("click", plus, false);
+				document.getElementById("minus").addEventListener("click", minus, false);
+				document.getElementById("setButton").addEventListener("click", set, false);
+				document.getElementById("save").addEventListener("click", set, false);
+
+				topic();
+				topic();
+				readCSS();
+			}
+
+			//文字列を挿入する
+			String.prototype.insert = function(key,word){
+				var index = this.indexOf(key);
+				if(-1 == index) throw key;
+				return (this.slice(0, index) + word + this.slice(index, this.length));
+			};
+
+			//makeを押した時
+			function make (e){
+				e.preventDefault();
+
+				var base = document.getElementById("base").value;
+				var head = document.getElementById("head").value;
+				var css = document.getElementById("css").value;
+				var javascript = document.getElementById("javascript").value;
+				var body = "\n\n";
+				var form = document.forms["contents"];
+				console.log(number);
+				console.log(form);
+
+				function template(kind, value){
+					switch(kind){
+						case "topicTitle":
+							return ( "<div class='panel'>\n<h3>" + value + "</h3>\n" );
+							break;
+						case "topicDocument":
+							return ("" + value + "\n</div>\n\n");
+							break;
+						default:
+							console.log(kind + "function template");
+							break;
+					}
+				}
+
+				for(var i=0; i<number; i++){
+					console.log("i:" + i + " form.element[i].name:" + form[i].name);
+					body += template(form[i].name.slice(0, form[i].name.indexOf(".")), form[i].value);
+				}
+
+				head = head + "\n\n";
+				css = "<style type='text/css'>\n" + css + "\n</style>\n\n";
+				javascript = "<script type='text/javascript'>\n" + javascript + "\n</scr" + "ipt>\n\n";
+
+				try{
+					base = base.insert("</head>", head);
+					base = base.insert("</head>", css);
+					base = base.insert("</head>", javascript);
+					base = base.insert("</body>", body);
+					base = base.replace(/</g,"&lt;");
+					base = base.replace(/>/g,"&gt;");
+					base = "<pre>"+ base + "</pre>";
+				}catch(e){
+					e = e.replace(/</g,"&lt;");
+					e = e.replace(/>/g,"&gt;");
+					base = "Error : It does not contain " + e + " to Base HTML.";//It does not contain Head to HTML.
+				}
+
+				var html = document.getElementById("htmlDocument");
+				html.innerHTML = base;
+
+				document.getElementById("contents").style.display = "none";
+				document.getElementById("setting").style.display = "none";
+				document.getElementById("preview").style.display = "block";
+			}
+
+			//backを押した時
+			function back(){
+				document.getElementById("contents").style.display = "block";
+				document.getElementById("setting").style.display = "none";
+				document.getElementById("preview").style.display = "none";
+			}
+
+			//plusを押した時
+			function plus(e){
+				var frame = document.createElement("div");
+				frame.style.position = "absolute";
+				frame.style.top = e.target.offsetTop + e.target.height + "px";
+				frame.style.border = "solid";
+				frame.innerHTML = "test";
+				e.target.parentNode.appendChild(frame);
+				frame.style.left = e.target.offsetLeft + e.target.width/2 - frame.clientWidth/2 + "px";
+
+				//Debug
+				console.log(e.target.width);
+				console.log(frame.width);
+				console.dir(frame);
+			}
+
+			//topicを追加する
+			function topic () {
+				number++;
+
+				//topic画像の前にdivを作成
+				var div = document.createElement("div");
+				div.className = "panel";
+				var controller = document.getElementById("controller");
+				controller.parentNode.insertBefore(div,controller);
+
+				//inputを作成
+				var input = document.createElement("input");
+				input.name = "topicTitle." + number;
+				input.type = "text";
+				input.placeholder = "topic";
+				div.appendChild(input);
+				div.appendChild(document.createElement("br"));
+
+				number++;
+
+				//textareaを作成
+				var textarea = document.createElement("textarea");
+				textarea.name = "topicDocument." + number;
+				textarea.rows = "8";
+				textarea.placeholder = "document";
+				div.appendChild(textarea);
+			}
+
+			//ノードを削除する
+			function minus () {
+				if (0 < number){
+					var flag = confirm("Remove?");
+					if (flag == true){
+						number--;
+						var controller = document.getElementById("controller");
+						controller.parentNode.removeChild(document.getElementById("controller").previousSibling);
+					}
+				}
+			}
+
+			//settingを押された時
+			function set () {
+				var contents = document.getElementById("contents");
+				if( "none" == document.defaultView.getComputedStyle(contents, "").display){
+					contents.style.display = "block";
+				}
+				else{
+					contents.style.display = "none";
+				}
+
+				var setting = document.getElementById("setting");
+				if( "none" == document.defaultView.getComputedStyle(setting, "").display){
+					setting.style.display = "block";
+				}
+				else{
+					setting.style.display = "none";
+				}
+			}
+
+			//設定を読み込む
+			function readCSS () {
+				ajax("css","http://www.asahi-net.or.jp/~yb7m-tkmt/MakeHP/MadeCSS.css");
+				ajax("javascript","http://www.asahi-net.or.jp/~yb7m-tkmt/MakeHP/MadeJS.js");
+				ajax("head","http://www.asahi-net.or.jp/~yb7m-tkmt/MakeHP/MadeHead.txt");
+				ajax("base","http://www.asahi-net.or.jp/~yb7m-tkmt/MakeHP/MadeBase.txt");
+			}
+
+			//Ajaxで外部ファイルを読み込む
+			function ajax(id, url){
+				var xmlHttp;
+				if (window.XMLHttpRequest){
+					xmlHttp = new XMLHttpRequest();
+				}
+				else{
+					if (window.ActiveXObject){
+						xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					else{
+						xmlHttp = null;
+					}
+				}
+
+				xmlHttp.onreadystatechange = function () {
+					if(xmlHttp.readyState == 4 && xmlHttp.status == 400){
+						document.getElementById(id).innerHTML = xmlHttp.responseText;
+					}
+					else{
+						if(xmlHttp.status == 200){
+							document.getElementById(id).innerHTML = xmlHttp.responseText;
+							document.getElementById(id).placeholder = "code of " + id;
+						}else{
+							document.getElementById(id).placeholder = xmlHttp.status + " error : Please contact the administrator.";
+						}
+					}
+				};
+				xmlHttp.open("GET", url, true);
+				xmlHttp.send(null);
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="board">
+			<!--main-->
+			<section id="contents">
+				<h1>MakeHP</h1>
+				<form name="contents" action="" method="post">
+					<div id="controller" class="panel center">
+						<img id="plus" src="http://www.asahi-net.or.jp/~yb7m-tkmt/img/plus.png" class="img">
+						<img id="minus" src="http://www.asahi-net.or.jp/~yb7m-tkmt/img/minus.png" class="img">
+					</div>
+					<input type="button" id="setButton" value="Setting" class="right">
+					<input type="submit" id="make" value="Make">
+				</form>
+			</section>
+	
+			<!--setting-->
+			<section id="setting">
+				<h1>Setting</h1>
+				<form name="setting" action="" method="post">
+					<div class="panel">
+						<p>CSS</p>
+						<textarea id="css" rows="24"></textarea>
+					</div>
+					<div class="panel">
+						<p>JavaScript</p>
+						<textarea id="javascript" rows="24"></textarea>
+					</div>
+					<div class"panel">
+						<p>head</p>
+						<textarea id="head" rows="24"></textarea>
+					</div>
+					<div class"panel">
+						<p>Base HTML</p>
+						<textarea id="base" rows="24"></textarea>
+					</div>
+					<p><input type="button" id="save" value="Save"></p>
+				</form>
+			</section>
+	
+			<!--preview-->
+			<section id="preview">
+				<h1>Preview</h1>
+				<div id="htmlDocument"></div>
+				<!--<div class="panel">
+					<p><abbr title="出力先">Output distination</abbr></p>
+					<input type="radio" name="distination" value="text" checked="checked">text
+					<input type="radio" name="distination" value="php">php
+				</div>-->
+				<p><input type="button" id="back" value="Back" class="right"><input type="button" value="Output"></p>
+			</section>
+
+			<footer>
+				<div class="box">
+					<p><a href="about.html">About?</a></p>
+				</div>
+				<div class="box">
+					<p><a href="http://www.asahi-net.or.jp/~yb7m-tkmt/index.html" target="_new"><abbr title="管理人のHP">HP of administrator</abbr></a></p>
+				</div>
+			</footer>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="http://www.jquerystudy.info/css_js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			textArray = '[1,["a",1],{"a":1,"b":2}]';
+			textObject = '{"array":[1,[2,3]],"b":2}';
+			jsonArray = JSON.parse(textArray);
+			jsonObject = JSON.parse(textObject);
+			console.dir(jsonArray);
+			console.dir(jsonObject);
+		});
+		</script>
+	</head>
+
+	<body>
+		<output></output>
+	</body>
+</html>
