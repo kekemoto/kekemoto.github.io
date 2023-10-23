@@ -29,6 +29,12 @@
       rel="stylesheet"
     />
 
+    <!-- normalize -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+
     <link rel="stylesheet" type="text/css" href="Layout3.css" />
 
     <style>
@@ -42,12 +48,6 @@
 
       td {
         width: 50%;
-      }
-
-      .teck {
-        color: gray;
-        font-size: small;
-        text-align: right;
       }
     </style>
   </head>
@@ -63,103 +63,116 @@
     </article>
 
     <article>
-      <h3>
-        <a href="https://kekemoto.github.io/japanese/"
-          >にほんごプログラミング</a
-        >
-      </h3>
-      <p>
-        日本語でプログラミングできます。<a
-          href="https://github.com/kekemoto/japanese"
-          >コード公開中</a
-        >
-      </p>
-      <p class="teck">TypeScript</p>
+      <div class="content">
+        <h3>
+          <a href="https://kekemoto.github.io/japanese/">
+            にほんごプログラミング
+          </a>
+          <a href="https://github.com/kekemoto/japanese">
+            <img src="./img/github-mark.svg" width="16" alt="github mark" />
+          </a>
+        </h3>
+        <p>日本語でプログラミングできます。</p>
+      </div>
 
-      <h3><a href="https://kekemoto.github.io/puyo/">五目ぷよ</a></h3>
-      <p>
-        某ぷよぷよっぽい五目並べ。<a href="https://github.com/kekemoto/puyo"
-          >コード公開中</a
-        >
-      </p>
-      <p class="teck">TypeScript p5.js</p>
+      <div class="content">
+        <h3>
+          <a href="https://kekemoto.github.io/puyo/">五目並べ・改</a>
+          <a href="https://github.com/kekemoto/puyo">
+            <img src="./img/github-mark.svg" width="16" alt="github mark" />
+          </a>
+        </h3>
+        <p>自分の色を５個並べたら勝ち。３個並べると相手を邪魔できるぞ。</p>
+      </div>
 
-      <h3>
-        <a
-          href="https://gist.github.com/kekemoto/da789d0110e539d2ca74b1a2665180b5"
-          >分散環境での ID 生成器</a
-        >
-      </h3>
-      <p>
-        Firebase で使われてる ID 生成器を Ruby
-        で書きました。時系列順に並び替え可能。<a
-          href="https://github.com/kekemoto/puyo"
-          >コード公開中</a
-        >
-      </p>
-      <p class="teck">Ruby</p>
+      <div class="content">
+        <h3>
+          <a
+            href="https://gist.github.com/kekemoto/da789d0110e539d2ca74b1a2665180b5"
+          >
+            分散環境での ID 生成器
+          </a>
+          <a
+            href="https://gist.github.com/kekemoto/da789d0110e539d2ca74b1a2665180b5"
+          >
+            <img src="./img/github-mark.svg" width="16" alt="github mark" />
+          </a>
+        </h3>
+        <p>
+          Firebase で使われてる ID 生成器を Ruby
+          で書きました。時系列順に並び替え可能。
+        </p>
+      </div>
 
-      <h3>
-        <a
-          href="https://scrapbox.io/kekemoto/SSE_%E3%82%92%EF%BC%91%E3%81%8B%E3%82%89%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82"
-          >Chat-SSE</a
-        >
-      </h3>
-      <p>
-        SSE を１から実装してチャットを作りました。<a
-          href="https://github.com/kekemoto/chat-sse"
-          >コード公開中</a
-        >
-      </p>
-      <p class="teck">Ruby Sinatra React</p>
+      <div class="content">
+        <h3>
+          <a
+            href="https://scrapbox.io/kekemoto/SSE_%E3%82%92%EF%BC%91%E3%81%8B%E3%82%89%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82"
+          >
+            Chat-SSE
+          </a>
+          <a href="https://github.com/kekemoto/chat-sse">
+            <img src="./img/github-mark.svg" width="16" alt="github mark" />
+          </a>
+        </h3>
+        <p>SSE を１から実装してチャットを作りました。</p>
+      </div>
 
-      <h3>
-        <a href="https://kekemoto.github.io/dominion_counter/"
-          >ドミニオン・カウンター</a
-        >
-      </h3>
-      <p>
-        ドミニオンというカードゲームのために様々な確率計算を行えるサイト。<a
-          href="https://github.com/kekemoto/dominion_counter"
-          >コード公開中</a
-        >
-      </p>
-      <p class="teck">React</p>
+      <div class="content">
+        <h3>
+          <a href="https://kekemoto.github.io/dominion_counter/"
+            >ドミニオン・カウンター</a
+          >
+          <a href="https://github.com/kekemoto/dominion_counter">
+            <img src="./img/github-mark.svg" width="16" alt="github mark" />
+          </a>
+        </h3>
+        <p>
+          ドミニオンというカードゲームのために様々な確率計算を行えるサイト。
+        </p>
+      </div>
 
-      <h3><a href="https://kekemoto.github.io/velcrote">Velcrote</a></h3>
-      <p>
-        ノートとノートを関連づけられるクラウド型メモ帳。まだ木構造しかできないし、クラウドではなくブラウザに保存している。<a
-          href="https://github.com/kekemoto/velcrote"
-          >コード公開中</a
-        >
-      </p>
-      <p class="teck">JavaScript Vue.js vuex</p>
+      <div class="content">
+        <h3>
+          <a href="https://kekemoto.github.io/velcrote">Velcrote</a>
+          <a href="https://github.com/kekemoto/velcrote">
+            <img src="./img/github-mark.svg" width="16" alt="github mark" />
+          </a>
+        </h3>
+        <p>
+          ノートとノートを関連づけられるクラウド型メモ帳。まだ木構造しかできないし、クラウドではなくブラウザに保存している。
+        </p>
+      </div>
 
-      <h3>
-        <a href="http://kekemoto.hatenablog.com/entry/2016/10/12/164934"
-          >BotFactory</a
-        >
-      </h3>
-      <p>ゲーム用 Bot を作るツールを開発中。</p>
-      <p class="teck">JavaScript Node.js Ramda Pug Stylus</p>
+      <div class="content">
+        <h3>
+          <a href="http://kekemoto.hatenablog.com/entry/2016/10/12/164934"
+            >BotFactory</a
+          >
+        </h3>
+        <p>ゲーム用 Bot を作るツール。未完成です。</p>
+      </div>
 
-      <h3>
-        <a href="https://twitter.com/uranai_Redicon">レッドアイコン同盟</a>
-      </h3>
-      <p>Botのキャラクターと会話しながら謎を解くゲーム。完成してます。</p>
-      <p class="teck">no program</p>
+      <div class="content">
+        <h3>
+          <a href="https://twitter.com/uranai_Redicon">レッドアイコン同盟</a>
+        </h3>
+        <p>Botのキャラクターと会話しながら謎を解くゲーム。完成してます。</p>
+      </div>
 
-      <h3><a href="game.html">Game's</a></h3>
-      <p>
-        昔作った、微妙なゲームやツールを公開してるページ。サイトデザイン全然違う昔のページに飛びます。
-      </p>
-      <p class="teck">C++ DXライブラリ Java</p>
+      <div class="content">
+        <h3><a href="game.html">Game's</a></h3>
+        <p>
+          昔作った、微妙なゲームやツールを公開してるページ。サイトデザイン全然違う昔のページに飛びます。
+        </p>
+      </div>
 
-      <h3>MILLON VIEW</h3>
-      <p>
-        100万回以上、再生された人気の成人向け動画をクロールして紹介するサイト。心が折れて維持できず。
-      </p>
-      <p class="teck">PHP JavaScript MySQL</p>
+      <div class="content">
+        <h3>MILLON VIEW</h3>
+        <p>
+          100万回以上、再生された人気の成人向け動画をクロールして紹介するサイト。心が折れて維持できず。
+        </p>
+      </div>
     </article>
 
     <article>

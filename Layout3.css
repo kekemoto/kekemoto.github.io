@@ -1,6 +1,6 @@
 body {
   background-color: #f0f0f0;
-  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-family: "Zen Kaku Gothic New";
   margin: 0;
   line-height: 1.5;
 }
@@ -10,16 +10,8 @@ a {
   text-decoration: none;
 }
 
-li {
-  font-size: 110%;
-  margin-top: 1em;
-  margin-bottom: 0.2em;
-}
-
 body > article {
   width: 40em;
-  margin-left: auto;
-  margin-right: auto;
   background-color: white;
   padding: 1em 2em;
   margin: 2em auto;
@@ -30,8 +22,12 @@ article > h1 {
   margin: 0.5em 0em 0.67em;
 }
 
+.content {
+  margin-bottom: 3em;
+}
+
 #title {
-  font-family: "Comic Sans MS", sans-serif;
+  font-family: "Comic Sans MS";
   text-align: center;
   margin-top: 32px;
   font-size: 300%;
